@@ -8,7 +8,7 @@
     <div class="fw fl mt40">
         <p>Are you sure?</p>
         <p>You want to delete this data ?? </p>
-        <a href="{% url 'frontoffice:complains' %}">Cancel</a>
+        <a href="{% url 'leave:leaves' %}">Cancel</a>
         <form action="" method="post" id="">
         {% csrf_token %}
             <input type="submit" value="Confirm" class="btn btn-danger" >

@@ -162,10 +162,10 @@ $('#phone_call_log_form').submit(function(e){
         var form_ed_id = $('#form_ed_id').attr('value');
 
         if(form_ed_id.length <1){
-            var url = "{% url 'frontoffice:add_phone_call_log' %}";
+            var url = "{% url 'frontoffice:add_phonecalllog' %}";
             var action = 'add';
         }else{
-            var url = '/frontoffice/edit_phone_call_log/'+form_ed_id;
+            var url = '/frontoffice/edit_phonecalllog/'+form_ed_id;
             var action = 'edit';
         }
 
@@ -212,10 +212,10 @@ $('#postal_dispatch_form').submit(function(e){
         var form_ed_id = $('#form_ed_id').attr('value');
 
         if(form_ed_id.length <1){
-            var url = "{% url 'frontoffice:add_postal_dispatch' %}";
+            var url = "{% url 'frontoffice:add_postaldispatch' %}";
             var action = 'add';
         }else{
-            var url = '/frontoffice/edit_postal_dispatch/'+form_ed_id;
+            var url = '/frontoffice/edit_postaldispatch/'+form_ed_id;
             var action = 'edit';
         }
 
@@ -261,10 +261,10 @@ $('#postal_receive_form').submit(function(e){
         var form_ed_id = $('#form_ed_id').attr('value');
 
         if(form_ed_id.length <1){
-            var url = "{% url 'frontoffice:add_postal_receive' %}";
+            var url = "{% url 'frontoffice:add_postalreceive' %}";
             var action = 'add';
         }else{
-            var url = '/frontoffice/edit_postal_receive/'+form_ed_id;
+            var url = '/frontoffice/edit_postalreceive/'+form_ed_id;
             var action = 'edit';
         }
 
@@ -311,10 +311,10 @@ $('#visitor_book_form').submit(function(e){
         var form_ed_id = $('#form_ed_id').attr('value');
 
         if(form_ed_id.length <1){
-            var url = "{% url 'frontoffice:add_visitor_book' %}";
+            var url = "{% url 'frontoffice:add_visitorbook' %}";
             var action = 'add';
         }else{
-            var url = '/frontoffice/edit_visitor_book/'+form_ed_id;
+            var url = '/frontoffice/edit_visitorbook/'+form_ed_id;
             var action = 'edit';
         }
 
@@ -377,7 +377,7 @@ $('#leave_form').submit(function(e){
                     if(action == 'add'){
                         var user = data.user
                         var re_url = "{% url 'leave:leaves' %}";
-                        printSuccess(data.success,re_url);
+                        printSuccess(data.success, re_url);
                     }else{
                         var re_url = "{% url 'leave:leaves' %}";
                         printSuccess(data,re_url);
@@ -401,6 +401,206 @@ $('#leave_form').submit(function(e){
         });
     });
 /// leave
+
+/// leave_type
+$('#leave_type_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'leave:add_leave_type' %}";
+            var action = 'add';
+        }else{
+            var url = '/leave/edit_leave_type/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'leave:leavetypes' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'leave:leavetypes' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// leave_type
+
+/// author
+$('#author_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_author' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_author/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:authors' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:authors' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// author
+
+/// publisher
+$('#publisher_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_publisher' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_publisher/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:publishers' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:publishers' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// publisher
+
+/// subject
+$('#subject_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_subject' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_subject/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:subjects' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:subjects' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// subject
 </script>
 </body>
 </html>

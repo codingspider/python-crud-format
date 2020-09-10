@@ -2,23 +2,23 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.generic import View
 from ..models import Phonecalllog
-from ..forms.forms import PhonecalllogForm
+from ..forms.phonecalllogform import AddPhonecalllogForm, EditPhonecalllogForm
 
 
 class AllPhoneCallLogView(View):
     model = Phonecalllog
-    template_name = 'phonecall/index.html'
+    template_name = 'phonecalllog/index.html'
 
     def get(self, request):
-        phone_calls = Phonecalllog.objects.filter(active_status=2).order_by('-id')
-        context = {'phone_calls': phone_calls}
+        phonecalllogs = Phonecalllog.objects.filter(active_status=2).order_by('-id')
+        context = {'phonecalllogs': phonecalllogs}
         return render(request, self.template_name, context)
 
 
 class AddPhoneCallLogView(View):
     model = Phonecalllog
-    form_class = PhonecalllogForm
-    template_name = 'phonecall/add_phone_call_log.html'
+    form_class = AddPhonecalllogForm
+    template_name = 'phonecalllog/add_phonecalllog.html'
 
     def get(self, request):
         form = self.form_class()
@@ -28,11 +28,11 @@ class AddPhoneCallLogView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            phone_call_log = form.save(commit=False)
-            phone_call_log.save()
+            phonecalllog = form.save(commit=False)
+            phonecalllog.save()
 
             response = {
-                'user': phone_call_log.pk,
+                'user': phonecalllog.pk,
                 'success': 'Success! '
             }
             return JsonResponse(response)
@@ -43,18 +43,18 @@ class AddPhoneCallLogView(View):
 
 class EditPhoneCallLogView(View):
     model = Phonecalllog
-    form_class = PhonecalllogForm
-    template_name = 'phonecall/edit_phone_call_log.html'
+    form_class = EditPhonecalllogForm
+    template_name = 'phonecalllog/edit_phonecalllog.html'
 
     def get(self, request, pk, *args, **kwargs):
-        phone_log = Phonecalllog.objects.get(pk=pk)
-        form = self.form_class(instance=phone_log)
+        phonecalllog = Phonecalllog.objects.get(pk=pk)
+        form = self.form_class(instance=phonecalllog)
         context = {'form': form, 'pk': pk}
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        phone_log = Phonecalllog.objects.get(pk=pk)
-        form = self.form_class(request.POST,request.FILES, instance=phone_log)
+        phonecalllog = Phonecalllog.objects.get(pk=pk)
+        form = self.form_class(request.POST, request.FILES, instance=phonecalllog)
 
         if form.is_valid():
             form.save()
@@ -69,29 +69,25 @@ class EditPhoneCallLogView(View):
 
 class DeletePhoneCallLogView(View):
 
-    template_name = 'phonecall/delete_phone_call_log.html'
+    template_name = 'phonecalllog/delete_phonecalllog.html'
 
     def get(self, request, pk):
-        complain = Phonecalllog.objects.get(pk=pk)
-        context ={
-            'complain': complain
+        phonecalllog = Phonecalllog.objects.get(pk=pk)
+        context = {
+            'phonecalllog': phonecalllog
         }
         return render(request, self.template_name,context)
 
     def post(self, request, pk, *args, **kwargs):
-        notice = Phonecalllog.objects.get(pk=pk)
-        notice.active_status = 0
-        notice.save()
+        phonecalllog = Phonecalllog.objects.get(pk=pk)
+        phonecalllog.active_status = 0
+        phonecalllog.save()
 
         return redirect('frontoffice:phonecalllogs')
 
 
 class DetailPhoneCallLogView(View):
-    def get(self, request, pk):
-        phonecalllog = Phonecalllog.objects.get(id=pk)
-        context = {'phonecalllog': phonecalllog}
-        return render(request, 'phonecall/phone_call_log_detail.html', context)
-
+   pass
 
 
 

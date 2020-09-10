@@ -8,7 +8,9 @@ from .choices import APPLY_STATUS_CHOICE
 # -------------------------- leave type-------------------
 class LeaveType(models.Model):
     name = models.CharField(max_length=200)
+    description = models.TextField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
+    active_status = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
         return self.name

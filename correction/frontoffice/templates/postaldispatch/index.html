@@ -4,7 +4,7 @@
 
         {% if perms.frontoffice.add_postaldispatch   %}
             <div class="fw fl mt40">
-                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_postal_dispatch' %}">Add Postal Dispatch</a>
+                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_postaldispatch' %}">Add Postal Dispatch</a>
             </div>
         {% endif %}
 
@@ -19,38 +19,36 @@
 					<th>Dispatch</th>
 					<th>Address</th>
 					<th>Attachment</th>
-                        {% if perms.frontoffice.change_edit_postal_dispatch    %}
+                        {% if perms.frontoffice.change_postaldispatch    %}
                             <th scope="col">Edit</th>
                         {% endif %}
-                        {% if perms.frontoffice.delete_postal_dispatch  %}
+                        {% if perms.frontoffice.delete_postaldispatch  %}
                             <th scope="col">Delete</th>
                         {% endif %}
 				</tr>
                 </thead>
             <tbody>
 
-            {% for value in postal_dispatch  %}
+            {% for postaldispatch in postaldispatchs  %}
                 <tr>
 					<td>{{forloop.counter}}</td>
-					<td>{{value.receiver}}</td>
-					<td >{{value.sender}}</td>
-					<td>{{value.referance}}</td>
-					<td>{{value.dispatch_date}}</td>
-					<td>{{value.address}}</td>
+					<td>{{postaldispatch.receiver}}</td>
+					<td >{{postaldispatch.sender}}</td>
+					<td>{{postaldispatch.referance}}</td>
+					<td>{{postaldispatch.dispatch_date}}</td>
+					<td>{{postaldispatch.address}}</td>
 					<td>
-						{% if value.attachment %}
-							<a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
+						{% if postaldispatch.attachment %}
+							<a class="badge badge-info" href="{{postaldispatch.attachment.url}}" target="_blank">Attachment</a>
 						{% else %}
 							None
 						{% endif %}
 					</td>
-
-
-                    {% if perms.frontoffice.change_complain  %}
-                        <td><a href="{% url 'frontoffice:edit_postal_dispatch' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                    {% if perms.frontoffice.change_postaldispatch %}
+                        <td><a href="{% url 'frontoffice:edit_postaldispatch' postaldispatch.id %}" class="btn btn-primary btn-sm">Edit</a></td>
                     {% endif %}
-                    {% if perms.frontoffice.delete_complain  %}
-                        <td><a href="{% url 'frontoffice:delete_postal_dispatch' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                    {% if perms.frontoffice.delete_postaldispatch  %}
+                        <td><a href="{% url 'frontoffice:delete_postaldispatch' postaldispatch.id %}" class="btn btn-danger btn-sm">Delete</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}

@@ -17,6 +17,9 @@
             <th scope="col">Leave Type</th>
             <th scope="col">Apply Date</th>
             <th scope="col">Reason</th>
+            <th scope="col">Attachment</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
         </thead>
         <tbody>
@@ -29,17 +32,17 @@
             <td>{{value.reason}}</td>
             <td>
                 {% if leave.attachment %}
-                <a class="badge badge-info" href="{{leave.attachment.url}}" target="_blank">Attachment</a>
+                <a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
                 {% else %}
                 None
                 {% endif %}
             </td>
 
             {% if perms.leave.change_leave %}
-            <td><a href="{% url 'leave:edit_leave' leave.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            <td><a href="{% url 'leave:edit_leave' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
             {% endif %}
             {% if perms.leave.delete_leave %}
-            <td><a href="{% url 'leave:delete_leave' leave.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            <td><a href="{% url 'leave:delete_leave' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
             {% endif %}
         </tr>
         {% endfor %}

@@ -7,7 +7,7 @@
 {% if perms.frontoffice.delete_frontoffice  %}
     <div class="fw fl mt40">
         <p>Are you sure?</p>
-        <p>You want to delete  {{ complain.complain_type }}  complain </p>
+        <p>You want to delete  {{ complain.complain_type }} ? </p>
         <a href="{% url 'frontoffice:complains' %}">Cancel</a>
         <form action="" method="post" id="">
         {% csrf_token %}

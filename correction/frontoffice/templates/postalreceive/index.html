@@ -4,7 +4,7 @@
 
         {% if perms.frontoffice.add_postalreceive   %}
             <div class="fw fl mt40">
-                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_postal_receive' %}">Add Postal Receive</a>
+                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_postalreceive' %}">Add Postal Receive</a>
             </div>
         {% endif %}
 
@@ -19,27 +19,27 @@
 					<th>Receive Date</th>
 					<th>Address</th>
 					<th>Attachment</th>
-                        {% if perms.frontoffice.change_edit_postal_receive    %}
+                        {% if perms.frontoffice.change_postalreceive    %}
                             <th scope="col">Edit</th>
                         {% endif %}
-                        {% if perms.frontoffice.delete_postal_receive  %}
+                        {% if perms.frontoffice.delete_postalreceive  %}
                             <th scope="col">Delete</th>
                         {% endif %}
 				</tr>
                 </thead>
             <tbody>
 
-            {% for value in postal_receive  %}
+            {% for postalreceive in postalreceives  %}
                 <tr>
 					<td>{{forloop.counter}}</td>
-					<td>{{value.receiver}}</td>
-					<td >{{value.sender}}</td>
-					<td>{{value.referance}}</td>
-					<td>{{value.receive_date}}</td>
-					<td>{{value.address}}</td>
+					<td>{{postalreceive.receiver}}</td>
+					<td >{{postalreceive.sender}}</td>
+					<td>{{postalreceive.referance}}</td>
+					<td>{{postalreceive.receive_date}}</td>
+					<td>{{postalreceive.address}}</td>
 					<td>
-						{% if value.attachment %}
-							<a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
+						{% if postalreceive.attachment %}
+							<a class="badge badge-info" href="{{postalreceive.attachment.url}}" target="_blank">Attachment</a>
 						{% else %}
 							None
 						{% endif %}
@@ -47,10 +47,10 @@
 
 
                     {% if perms.frontoffice.change_postalreceive %}
-                        <td><a href="{% url 'frontoffice:edit_postal_receive' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                        <td><a href="{% url 'frontoffice:edit_postalreceive' postalreceive.id %}" class="btn btn-primary btn-sm">Edit</a></td>
                     {% endif %}
                     {% if perms.frontoffice.delete_postalreceive  %}
-                        <td><a href="{% url 'frontoffice:delete_postal_receive' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a href="{% url 'frontoffice:delete_postalreceive' postalreceive.id %}" class="btn btn-danger btn-sm">Delete</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}

@@ -21,4 +21,5 @@ urlpatterns = [
     path('institute/', include('institute.urls')),
     path('frontoffice/', include('frontoffice.urls')),
     path('leave/', include('leave.urls')),
+    path('library/', include('library.urls')),
 ]

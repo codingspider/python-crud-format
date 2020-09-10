@@ -1,0 +1,46 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.library.view_publisher  %}
+{% if perms.library.add_publisher %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_author' %}">Add Author</a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Descripton</th>
+             {% if perms.library.change_author %}
+            <td>Edit</td>
+            {% endif %}
+            {% if perms.library.delete_author  %}
+            <td>Delete</td>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for author in authors %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td class="tcap">{{author.name}}</td>
+            <td>{{author.description}}</td>
+            {% if perms.library.change_author %}
+            <td><a href="{% url 'library:edit_author' author.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.library.delete_author  %}
+            <td><a href="{% url 'library:delete_author' author.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'frontoffice.apps.FrontofficeConfig',
     'bootstrap_datepicker_plus',
     'django.contrib.sites',
-    'leave'
+    'leave',
+    'library'
 ]
 SITE_ID = 1
 BOOTSTRAP4 = {

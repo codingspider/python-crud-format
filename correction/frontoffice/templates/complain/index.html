@@ -17,9 +17,7 @@
 					<th>Complain By</th>
 					<th>Phone</th>
 					<th>Date</th>
-					<th>Description</th>
 					<th>Attachment</th>
-					<th>Action</th>
                         {% if perms.frontoffice.change_complain   %}
                             <th scope="col">Edit</th>
                         {% endif %}
@@ -30,17 +28,16 @@
                 </thead>
             <tbody>
 
-            {% for value in complains  %}
+            {% for complain in complains  %}
                 <tr>
 					<td>{{forloop.counter}}</td>
-					<td>{{value.complain_type}}</td>
-					<td >{{value.complain_by}}</td>
-					<td>{{value.phone}}</td>
-					<td>{{value.date}}</td>
-					<td>{{value.description}}</td>
+					<td>{{complain.complain_type}}</td>
+					<td >{{complain.complain_by}}</td>
+					<td>{{complain.phone}}</td>
+					<td>{{complain.date}}</td>
 					<td>
 						{% if value.attachment %}
-							<a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
+							<a class="badge badge-info" href="{{complain.attachment.url}}" target="_blank">Attachment</a>
 						{% else %}
 							None
 						{% endif %}
@@ -48,10 +45,10 @@
 
 
                     {% if perms.frontoffice.change_complain  %}
-                        <td><a href="{% url 'frontoffice:edit_complain' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                        <td><a href="{% url 'frontoffice:edit_complain' complain.id %}" class="btn btn-primary btn-sm">Edit</a></td>
                     {% endif %}
                     {% if perms.frontoffice.delete_complain  %}
-                        <td><a href="{% url 'frontoffice:delete_complain' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a href="{% url 'frontoffice:delete_complain' complain.id %}" class="btn btn-danger btn-sm">Delete</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}

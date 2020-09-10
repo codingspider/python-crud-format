@@ -1,0 +1,17 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="col-md-12">
+    <table class="table table-bordered">
+        <thead>
+            <th>Name</th>
+            <th>Description</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ author.name}}</td>
+                <td>{{ author.description}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

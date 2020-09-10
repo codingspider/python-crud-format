@@ -4,7 +4,7 @@
 
         {% if perms.frontoffice.add_visitorbook   %}
             <div class="fw fl mt40">
-                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_visitor_book' %}">Add Visitor Book</a>
+                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_visitorbook' %}">Add Visitor Book</a>
             </div>
         {% endif %}
 
@@ -22,30 +22,30 @@
 					<th>In time</th>
 					<th>Out time</th>
 					<th>Attachment</th>
-                        {% if perms.frontoffice.change_edit_postal_receive    %}
+                        {% if perms.frontoffice.change_visitorbook    %}
                             <th scope="col">Edit</th>
                         {% endif %}
-                        {% if perms.frontoffice.delete_postal_receive  %}
+                        {% if perms.frontoffice.delete_visitorbook  %}
                             <th scope="col">Delete</th>
                         {% endif %}
 				</tr>
                 </thead>
             <tbody>
 
-            {% for value in visitor_book  %}
+            {% for visitorbook in visitorbooks  %}
                 <tr>
 					<td>{{forloop.counter}}</td>
-					<td>{{value.name}}</td>
-					<td >{{value.purpose}}</td>
-					<td>{{value.phone}}</td>
-					<td>{{value.meet_user}}</td>
-					<td>{{value.id_card}}</td>
-					<td>{{value.date}}</td>
-					<td>{{value.in_time}}</td>
-					<td>{{value.out_time}}</td>
+					<td>{{visitorbook.name}}</td>
+					<td >{{visitorbook.purpose}}</td>
+					<td>{{visitorbook.phone}}</td>
+					<td>{{visitorbook.meet_user}}</td>
+					<td>{{visitorbook.id_card}}</td>
+					<td>{{visitorbook.date}}</td>
+					<td>{{visitorbook.in_time}}</td>
+					<td>{{visitorbook.out_time}}</td>
 					<td>
 						{% if value.attachment %}
-							<a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
+							<a class="badge badge-info" href="{{visitorbook.attachment.url}}" target="_blank">Attachment</a>
 						{% else %}
 							None
 						{% endif %}
@@ -53,10 +53,10 @@
 
 
                     {% if perms.frontoffice.change_visitorbook %}
-                        <td><a href="{% url 'frontoffice:edit_visitor_book' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                        <td><a href="{% url 'frontoffice:edit_visitorbook' visitorbook.id %}" class="btn btn-primary btn-sm">Edit</a></td>
                     {% endif %}
                     {% if perms.frontoffice.delete_visitorbook  %}
-                        <td><a href="{% url 'frontoffice:delete_visitor_book' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a href="{% url 'frontoffice:delete_visitorbook' visitorbook.id %}" class="btn btn-danger btn-sm">Delete</a></td>
                     {% endif %}
                 </tr>
             {% endfor %}

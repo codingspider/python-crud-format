@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.library.view_subject   %}
+{% if perms.library.add_subject %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_subject' %}">Add Subject</a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Descripton</th>
+             {% if perms.library.change_subject %}
+            <td>Edit</td>
+            {% endif %}
+            {% if perms.library.delete_subject %}
+            <td>Delete</td>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for subject in subjects %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td class="tcap">{{subject.name}}</td>
+            <td>{{subject.description}}</td>
+
+
+            {% if perms.library.change_subject %}
+            <td><a href="{% url 'library:edit_subject' subject.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.library.delete_subject %}
+            <td><a href="{% url 'library:delete_subject' subject.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

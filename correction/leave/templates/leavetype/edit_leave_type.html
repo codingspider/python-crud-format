@@ -1,0 +1,28 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.leave.edit_leavetype  %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="leave_type_form" novalidate>
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.name.label }}</label>
+                        {{ form.name }}
+                    </div>
+
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.description.label }}</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+{% endblock %}
+

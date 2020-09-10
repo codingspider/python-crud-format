@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.generic import View
 from ..models import Postalreceive
-from ..forms.forms import PostalreceiveForm
+from ..forms.postalreceiveform import AddPostalreceiveForm, EditPostalreceiveForm
 import datetime
 from django.utils import formats
 
@@ -12,16 +12,16 @@ class AllPostalReceiveView(View):
     template_name = 'postalreceive/index.html'
 
     def get(self, request):
-        postal_receive = Postalreceive.objects.filter(active_status=2).order_by('-id')
+        postalreceives = Postalreceive.objects.filter(active_status=2).order_by('-id')
         date = formats.date_format(datetime.datetime.now().date(), 'd-m-Y')
-        context = {'postal_receive': postal_receive, 'date': date}
+        context = {'postalreceives': postalreceives, 'date': date}
         return render(request, self.template_name, context)
 
 
 class AddPostalReceiveView(View):
     model = Postalreceive
-    form_class = PostalreceiveForm
-    template_name = 'postalreceive/add_postal_receive.html'
+    form_class = AddPostalreceiveForm
+    template_name = 'postalreceive/add_postalreceive.html'
 
     def get(self, request):
         form = self.form_class()
@@ -32,10 +32,10 @@ class AddPostalReceiveView(View):
         form = self.form_class(request.POST, request.FILES)
 
         if form.is_valid():
-            postal_receive = form.save(commit=False)
-            postal_receive.save()
+            postalreceive = form.save(commit=False)
+            postalreceive.save()
             response = {
-                'user': postal_receive.pk,
+                'user': postalreceive.pk,
                 'success': 'Success! '
             }
             return JsonResponse(response)
@@ -45,18 +45,18 @@ class AddPostalReceiveView(View):
 
 class EditPostalReceiveView(View):
     model = Postalreceive
-    form_class = PostalreceiveForm
-    template_name = 'postalreceive/edit_postal_receive.html'
+    form_class = EditPostalreceiveForm
+    template_name = 'postalreceive/edit_postalreceive.html'
 
     def get(self, request, pk, *args, **kwargs):
-        postal_receive = Postalreceive.objects.get(pk=pk)
-        form = self.form_class(instance=postal_receive)
+        postalreceive = Postalreceive.objects.get(pk=pk)
+        form = self.form_class(instance=postalreceive)
         context = {'form': form, 'pk': pk}
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        notices = Postalreceive.objects.get(pk=pk)
-        form = self.form_class(request.POST, request.FILES, instance=notices)
+        postalreceive = Postalreceive.objects.get(pk=pk)
+        form = self.form_class(request.POST, request.FILES, instance=postalreceive)
 
         if form.is_valid():
             form.save()
@@ -69,19 +69,19 @@ class EditPostalReceiveView(View):
 
 
 class DeletePostalReceiveView(View):
-    template_name = 'postalreceive/delete_postal_receive.html'
+    template_name = 'postalreceive/delete_postalreceive.html'
 
     def get(self, request, pk):
-        complain = Postalreceive.objects.get(pk=pk)
+        postalreceive = Postalreceive.objects.get(pk=pk)
         context = {
-            'complain': complain
+            'postalreceive': postalreceive
         }
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        postal_dispatch = Postalreceive.objects.get(pk=pk)
-        postal_dispatch.active_status = 0
-        postal_dispatch.save()
+        postaldispatch = Postalreceive.objects.get(pk=pk)
+        postaldispatch.active_status = 0
+        postaldispatch.save()
         return redirect('frontoffice:postalreceives')
 
 

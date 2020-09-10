@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.generic import View
 from ..models import Complain
-from ..forms.forms import ComplainForm
+from ..forms.complainform import AddComplainForm, EditComplainForm
 import datetime
 from django.utils import formats
 
@@ -20,7 +20,7 @@ class AllComplainView(View):
 
 class AddComplainView(View):
     model = Complain
-    form_class = ComplainForm
+    form_class = AddComplainForm
     template_name = 'complain/add_complain.html'
 
     def get(self, request):
@@ -47,18 +47,18 @@ class AddComplainView(View):
 
 class EditComplainView(View):
     model = Complain
-    form_class = ComplainForm
+    form_class = EditComplainForm
     template_name = 'complain/edit_complain.html'
 
     def get(self, request, pk, *args, **kwargs):
-        notices = Complain.objects.get(pk=pk)
-        form = self.form_class(instance=notices)
+        complain = Complain.objects.get(pk=pk)
+        form = self.form_class(instance=complain)
         context = {'form': form, 'pk': pk}
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        notices = Complain.objects.get(pk=pk)
-        form = self.form_class(request.POST,request.FILES, instance=notices)
+        complain = Complain.objects.get(pk=pk)
+        form = self.form_class(request.POST,request.FILES, instance=complain)
 
         if form.is_valid():
             form.save()

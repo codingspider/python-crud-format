@@ -1,5 +1,5 @@
 import datetime
-from ..form.forms import LeaveForm
+from ..forms.leaveform import AddLeaveForm, EditLeaveForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import formats
@@ -20,7 +20,7 @@ class AllLeaveView(View):
 
 class AddLeaveView(View):
     model = Leave
-    form_class = LeaveForm
+    form_class = AddLeaveForm
     template_name = 'leave/add_leave.html'
 
     def get(self, request):
@@ -45,7 +45,7 @@ class AddLeaveView(View):
 
 class EditLeaveView(View):
     model = Leave
-    form_class = LeaveForm
+    form_class = EditLeaveForm
     template_name = 'leave/edit_leave.html'
 
     def get(self, request, pk, *args, **kwargs):
@@ -71,7 +71,7 @@ class EditLeaveView(View):
 
 class DeleteLeaveView(View):
 
-    template_name = 'announcement/notice/delete_notice.html'
+    template_name = 'leave/delete_leave.html'
 
     def get(self, request, pk):
         leaves = Leave.objects.get(pk=pk)

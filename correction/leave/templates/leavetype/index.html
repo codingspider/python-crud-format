@@ -1,0 +1,43 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.leave.view_leavetype   %}
+{% if perms.leave.add_leavetype  %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'leave:add_leave_type' %}">Add Leave Type</a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for value in leave_types %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{value.name}}</td>
+            <td>{{value.description}}</td>
+
+            {% if perms.leavetype.change_leave %}
+            <td><a href="{% url 'leave:edit_leave_type' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.leavetype.delete_leave %}
+            <td><a href="{% url 'leave:delete_leave_type' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -14,30 +14,30 @@ urlpatterns = [
     # complain
     path('phonecalllogs/', phonecalllog.AllPhoneCallLogView.as_view(), name="phonecalllogs"),
     path('phonecalllog/<int:pk>', phonecalllog.DetailPhoneCallLogView.as_view(), name="phonecalllog"),
-    path('add_phone_call_log/', phonecalllog.AddPhoneCallLogView.as_view(), name="add_phone_call_log"),
-    path('edit_phone_call_log/<int:pk>', phonecalllog.EditPhoneCallLogView.as_view(), name="edit_phone_call_log"),
-    path('delete_phone_call_log/<int:pk>', phonecalllog.DeletePhoneCallLogView.as_view(), name="delete_phone_call_log"),
+    path('add_phonecalllog/', phonecalllog.AddPhoneCallLogView.as_view(), name="add_phonecalllog"),
+    path('edit_phonecalllog/<int:pk>', phonecalllog.EditPhoneCallLogView.as_view(), name="edit_phonecalllog"),
+    path('delete_phonecalllog/<int:pk>', phonecalllog.DeletePhoneCallLogView.as_view(), name="delete_phonecalllog"),
 
     #postaldispatch
     path('postaldispatchs/', postaldispatch.AllPostalDispatchView.as_view(), name="postaldispatchs"),
     path('postaldispatch/<int:pk>', postaldispatch.DetailPostalDispatchView.as_view(), name="postaldispatch"),
-    path('add_postal_dispatch/', postaldispatch.AddPostalDispatchView.as_view(), name="add_postal_dispatch"),
-    path('edit_postal_dispatch/<int:pk>', postaldispatch.EditPostalDispatchView.as_view(), name="edit_postal_dispatch"),
-    path('delete_postal_dispatch/<int:pk>', postaldispatch.DeletePostalDispatchView.as_view(), name="delete_postal_dispatch"),
+    path('add_postaldispatch/', postaldispatch.AddPostalDispatchView.as_view(), name="add_postaldispatch"),
+    path('edit_postaldispatch/<int:pk>', postaldispatch.EditPostalDispatchView.as_view(), name="edit_postaldispatch"),
+    path('delete_postaldispatch/<int:pk>', postaldispatch.DeletePostalDispatchView.as_view(), name="delete_postaldispatch"),
 
     #postalreceive
     path('postalreceives/', postalreceive.AllPostalReceiveView.as_view(), name="postalreceives"),
     path('postalreceive/<int:pk>', postalreceive.DetailPostalReceiveView.as_view(), name="postalreceive"),
-    path('add_postal_receive/', postalreceive.AddPostalReceiveView.as_view(), name="add_postal_receive"),
-    path('edit_postal_receive/<int:pk>', postalreceive.EditPostalReceiveView.as_view(), name="edit_postal_receive"),
-    path('delete_postal_receive/<int:pk>', postalreceive.DeletePostalReceiveView.as_view(), name="delete_postal_receive"),
+    path('add_postalreceive/', postalreceive.AddPostalReceiveView.as_view(), name="add_postalreceive"),
+    path('edit_postalreceive/<int:pk>', postalreceive.EditPostalReceiveView.as_view(), name="edit_postalreceive"),
+    path('delete_postalreceive/<int:pk>', postalreceive.DeletePostalReceiveView.as_view(), name="delete_postalreceive"),
 
     # complain
     path('visitorbooks/', visitorbook.AllVisitorBookView.as_view(), name="visitorbooks"),
     path('visitorbook/<int:pk>', visitorbook.DetailVisitorBookView.as_view(), name="visitorbook"),
-    path('add_visitor_book/', visitorbook.AddVisitorBookView.as_view(), name="add_visitor_book"),
-    path('edit_visitor_book/<int:pk>', visitorbook.EditVisitorBookView.as_view(), name="edit_visitor_book"),
-    path('delete_visitor_book/<int:pk>', visitorbook.DeleteVisitorBookView.as_view(),name="delete_visitor_book"),
+    path('add_visitorbook/', visitorbook.AddVisitorBookView.as_view(), name="add_visitorbook"),
+    path('edit_visitorbook/<int:pk>', visitorbook.EditVisitorBookView.as_view(), name="edit_visitorbook"),
+    path('delete_visitorbook/<int:pk>', visitorbook.DeleteVisitorBookView.as_view(),name="delete_visitorbook"),
 
 ]
 
