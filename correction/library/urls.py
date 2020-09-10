@@ -61,9 +61,3 @@ urlpatterns = [
     path('delete_bookissue/<int:pk>', bookissue.DeleteBookIssueView.as_view(), name="delete_bookissue"),
 
 ]
-
-
-
-
-
-
