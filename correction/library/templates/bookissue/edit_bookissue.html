@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.library.edit_bookissue %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="bookissue_form">
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.member.label }}</label>
+                        {{ form.member }}
+                    </div>
+
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.issued_by.label }}</label>
+                        {{ form.issued_by }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.book.label }}</label>
+                        {{ form.book }}
+                    </div>
+
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.status.label }}</label>
+                        {{ form.status }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.issue_date.label }}</label>
+                        {{ form.issue_date }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.return_date.label }}</label>
+                        {{ form.return_date }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.note.label }}</label>
+                        {{ form.note }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+

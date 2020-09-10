@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.library.view_booklanguage   %}
+{% if perms.library.add_booklanguage %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_booklanguage' %}">Add Book Language </a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Descripton</th>
+             {% if perms.library.change_booklanguage %}
+            <td>Edit</td>
+            {% endif %}
+            {% if perms.library.delete_booklanguage %}
+            <td>Delete</td>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for booklanguage in booklanguages %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td class="tcap">{{booklanguage.name}}</td>
+            <td>{{booklanguage.description}}</td>
+
+
+            {% if perms.library.change_booklanguage %}
+            <td><a href="{% url 'library:edit_booklanguage' booklanguage.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.library.delete_booklanguage %}
+            <td><a href="{% url 'library:delete_booklanguage' booklanguage.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

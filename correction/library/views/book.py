@@ -1,27 +1,28 @@
 import datetime
-from ..forms.booklanguageform import AddBookLanguageForm, EditBookLanguageForm
+from ..forms.bookform import AddBookForm, EditBookForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import formats
 from django.views import View
-from ..models import BookLanguage
+from ..models import Book
+from django.http import HttpResponse
 
 
-class AllBookLanguageView(View):
-    model = BookLanguage
-    template_name = 'booklanguage/index.html'
+class AllBookView(View):
+    model = Book
+    template_name = 'book/index.html'
 
     def get(self, request):
-        booklanguages = BookLanguage.objects.filter(active_status=2).order_by('-id')
+        books = Book.objects.filter(active_status=2).order_by('-id')
         date = formats.date_format(datetime.datetime.now().date(), 'd-m-Y')
-        context = {'booklanguages': booklanguages, 'date': date}
+        context = {'books': books, 'date': date}
         return render(request, self.template_name, context)
 
 
-class AddBookLanguageView(View):
-    model = BookLanguage
-    form_class = AddBookLanguageForm
-    template_name = 'booklanguage/add_booklanguage.html'
+class AddBookView(View):
+    model = Book
+    form_class = AddBookForm
+    template_name = 'book/add_book.html'
 
     def get(self, request):
         form = self.form_class()
@@ -31,35 +32,35 @@ class AddBookLanguageView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            booklanguage = form.save(commit=False)
-            booklanguage.save()
+            book = form.save(commit=False)
+            book.save()
             response = {
-                'user': booklanguage.pk,
+                'user': book.pk,
                 'success': 'Success! '
             }
             return JsonResponse(response)
-
         else:
             return JsonResponse({"error": form.errors}, json_dumps_params={'indent': 2})
 
 
-class EditBookLanguageView(View):
-    model = BookLanguage
-    form_class = EditBookLanguageForm
-    template_name = 'booklanguage/edit_booklanguage.html'
+class EditBookView(View):
+    model = Book
+    form_class = EditBookForm
+    template_name = 'book/edit_book.html'
 
     def get(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        form = self.form_class(instance=booklanguage)
+        book = Book.objects.get(pk=pk)
+        form = self.form_class(instance=book)
         context = {'form': form, 'pk': pk}
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        form = self.form_class(request.POST, request.FILES, instance=booklanguage)
+        book = Book.objects.get(pk=pk)
+        form = self.form_class(request.POST, request.FILES, instance=book)
 
         if form.is_valid():
             form.save()
+
             response = {
                 'success': 'Success! '
             }
@@ -68,24 +69,34 @@ class EditBookLanguageView(View):
             return JsonResponse({"error": form.errors}, json_dumps_params={'indent': 2})
 
 
-class DeleteBookLanguageView(View):
+class DeleteBookView(View):
 
-    template_name = 'booklanguage/delete_booklanguage.html'
+    template_name = 'book/delete_book.html'
 
     def get(self, request, pk):
-        booklanguage = BookLanguage.objects.get(pk=pk)
+        book = Book.objects.get(pk=pk)
         context = {
-            'booklanguage': booklanguage
+            'book': book
         }
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        booklanguage.active_status = 0
-        booklanguage.save()
-        return redirect('library:booklanguages')
+        book = Book.objects.get(pk=pk)
+        book.active_status = 0
+        book.save()
+        return redirect('library:books')
 
 
-class DetailBookLanguageView(View):
-   pass
+class DetailBookView(View):
+    def get(self, request, pk):
+        book = Book.objects.get(pk=pk)
+        context = {
+            'book': book
+        }
+        return render(request, 'book/detail_book.html', context)
+
+
+
+
+
 

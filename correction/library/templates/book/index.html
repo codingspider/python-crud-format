@@ -1,0 +1,54 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.library.view_book %}
+{% if perms.library.add_book %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_book' %}">Add Book</a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Title</th>
+            <th scope="col">Book Number</th>
+            <th scope="col">ISBN Number</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+             {% if perms.library.change_book%}
+            <td>Edit</td>
+            {% endif %}
+            {% if perms.library.delete_book %}
+            <td>Delete</td>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td class="tcap">{{book.title}}</td>
+            <td>{{book.book_number}}</td>
+            <td>{{book.isbn_number}}</td>
+            <td>{{book.price}}</td>
+            <td>{{book.qty}}</td>
+
+
+            {% if perms.library.change_book %}
+            <td><a href="{% url 'library:edit_book' book.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.library.delete_book %}
+            <td><a href="{% url 'library:delete_book' book.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

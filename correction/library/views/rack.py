@@ -1,27 +1,27 @@
 import datetime
-from ..forms.booklanguageform import AddBookLanguageForm, EditBookLanguageForm
+from ..forms.rackform import AddRackForm, EditRackForm
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.utils import formats
 from django.views import View
-from ..models import BookLanguage
+from ..models import Rack
 
 
-class AllBookLanguageView(View):
-    model = BookLanguage
-    template_name = 'booklanguage/index.html'
+class AllRackView(View):
+    model = Rack
+    template_name = 'rack/index.html'
 
     def get(self, request):
-        booklanguages = BookLanguage.objects.filter(active_status=2).order_by('-id')
+        racks = Rack.objects.filter(active_status=2).order_by('-id')
         date = formats.date_format(datetime.datetime.now().date(), 'd-m-Y')
-        context = {'booklanguages': booklanguages, 'date': date}
+        context = {'racks': racks, 'date': date}
         return render(request, self.template_name, context)
 
 
-class AddBookLanguageView(View):
-    model = BookLanguage
-    form_class = AddBookLanguageForm
-    template_name = 'booklanguage/add_booklanguage.html'
+class AddRackView(View):
+    model = Rack
+    form_class = AddRackForm
+    template_name = 'rack/add_rack.html'
 
     def get(self, request):
         form = self.form_class()
@@ -31,10 +31,10 @@ class AddBookLanguageView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            booklanguage = form.save(commit=False)
-            booklanguage.save()
+            rack = form.save(commit=False)
+            rack.save()
             response = {
-                'user': booklanguage.pk,
+                'user': rack.pk,
                 'success': 'Success! '
             }
             return JsonResponse(response)
@@ -43,23 +43,24 @@ class AddBookLanguageView(View):
             return JsonResponse({"error": form.errors}, json_dumps_params={'indent': 2})
 
 
-class EditBookLanguageView(View):
-    model = BookLanguage
-    form_class = EditBookLanguageForm
-    template_name = 'booklanguage/edit_booklanguage.html'
+class EditRackView(View):
+    model = Rack
+    form_class = EditRackForm
+    template_name = 'rack/edit_rack.html'
 
     def get(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        form = self.form_class(instance=booklanguage)
+        rack = Rack.objects.get(pk=pk)
+        form = self.form_class(instance=rack)
         context = {'form': form, 'pk': pk}
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        form = self.form_class(request.POST, request.FILES, instance=booklanguage)
+        rack = Rack.objects.get(pk=pk)
+        form = self.form_class(request.POST, request.FILES, instance=rack)
 
         if form.is_valid():
             form.save()
+
             response = {
                 'success': 'Success! '
             }
@@ -68,24 +69,34 @@ class EditBookLanguageView(View):
             return JsonResponse({"error": form.errors}, json_dumps_params={'indent': 2})
 
 
-class DeleteBookLanguageView(View):
+class DeleteRackView(View):
 
-    template_name = 'booklanguage/delete_booklanguage.html'
+    template_name = 'rack/delete_rack.html'
 
     def get(self, request, pk):
-        booklanguage = BookLanguage.objects.get(pk=pk)
+        rack = Rack.objects.get(pk=pk)
         context = {
-            'booklanguage': booklanguage
+            'rack': rack
         }
         return render(request, self.template_name, context)
 
     def post(self, request, pk, *args, **kwargs):
-        booklanguage = BookLanguage.objects.get(pk=pk)
-        booklanguage.active_status = 0
-        booklanguage.save()
-        return redirect('library:booklanguages')
+        rack = Rack.objects.get(pk=pk)
+        rack.active_status = 0
+        rack.save()
+        return redirect('library:racks')
 
 
-class DetailBookLanguageView(View):
-   pass
+class DetailRackView(View):
+    def get(self, request, pk):
+        rack = Rack.objects.get(pk=pk)
+        context = {
+            'rack': rack
+        }
+        return render(request, 'rack/detail_rack.html', context)
+
+
+
+
+
 

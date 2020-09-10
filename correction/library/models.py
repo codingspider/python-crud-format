@@ -9,13 +9,13 @@ import os
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
     # ---------------------publisher------------------------------
 
@@ -39,7 +39,7 @@ class Subject(models.Model):
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
-        return self.name
+        return str(self.name) if self.name else ''
 
 
 # ---------------------book language------------------------------
@@ -79,7 +79,7 @@ class Book(models.Model):
     price = models.FloatField(null=True)
     qty = models.IntegerField(null=True)
     publisher = models.ForeignKey(Publisher, null=True, on_delete=models.SET_NULL)
-    author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
+    author = models.ForeignKey(Author, null=True, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, null=True, on_delete=models.SET_NULL)
     book_language = models.ForeignKey(BookLanguage, null=True, on_delete=models.SET_NULL)
     rack = models.ForeignKey(Rack, null=True, on_delete=models.SET_NULL)
@@ -90,7 +90,7 @@ class Book(models.Model):
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
-        return self.title
+        return str(self.title) if self.title else ''
 
 
 # ---------------------e-book------------------------------
@@ -122,7 +122,7 @@ class EBook(models.Model):
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
 
 # ---------------------book issue------------------------------

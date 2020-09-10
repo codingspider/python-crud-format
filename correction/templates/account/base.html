@@ -601,6 +601,257 @@ $('#subject_form').submit(function(e){
         });
     });
 /// subject
+
+/// book language
+$('#booklanguage_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_booklanguage' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_booklanguage/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:booklanguages' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:booklanguages' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// book language
+
+/// book rack
+$('#rack_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_rack' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_rack/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:racks' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:racks' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// book rack
+
+/// book Issue
+$('#bookissue_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_bookissue' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_bookissue/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:bookissues' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:bookissues' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// book Issue
+
+/// book 
+$('#book_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_book' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_book/'+ form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:books' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:books' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// book rack
+
+
+/// book 
+$('#ebook_form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+
+        var form_ed_id = $('#form_ed_id').attr('value');
+
+        if(form_ed_id.length <1){
+            var url = "{% url 'library:add_ebook' %}";
+            var action = 'add';
+        }else{
+            var url = '/library/edit_ebook/'+ form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'library:ebooks' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'library:ebooks' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// book rack
 </script>
 </body>
 </html>

@@ -31,10 +31,10 @@
             <td>{{publisher.description}}</td>
 
 
-            {% if perms.library.change_author %}
+            {% if perms.library.change_publisher %}
             <td><a href="{% url 'library:edit_publisher' publisher.id %}" class="btn btn-primary btn-sm">Edit</a></td>
             {% endif %}
-            {% if perms.library.delete_author %}
+            {% if perms.library.delete_publisher %}
             <td><a href="{% url 'library:delete_publisher' publisher.id %}" class="btn btn-danger btn-sm">Delete</a></td>
             {% endif %}
         </tr>

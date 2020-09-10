@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import author, publisher, subject
+from .views import author, publisher, subject, booklanguage, rack, book, bookissue, ebook
 
 app_name = 'library'
 
@@ -24,6 +24,41 @@ urlpatterns = [
     path('add_subject/', subject.AddSubjectView.as_view(), name="add_subject"),
     path('edit_subject/<int:pk>', subject.EditSubjectView.as_view(), name="edit_subject"),
     path('delete_subject/<int:pk>', subject.DeleteSubjectView.as_view(), name="delete_subject"),
+
+    # Book Language
+    path('booklanguages/', booklanguage.AllBookLanguageView.as_view(), name="booklanguages"),
+    path('booklanguage/<int:pk>', booklanguage.DetailBookLanguageView.as_view(), name="booklanguage"),
+    path('add_booklanguage/', booklanguage.AddBookLanguageView.as_view(), name="add_booklanguage"),
+    path('edit_booklanguage/<int:pk>', booklanguage.EditBookLanguageView.as_view(), name="edit_booklanguage"),
+    path('delete_booklanguage/<int:pk>', booklanguage.DeleteBookLanguageView.as_view(), name="delete_booklanguage"),
+
+    # Book Rack
+    path('racks/', rack.AllRackView.as_view(), name="racks"),
+    path('rack/<int:pk>', rack.DetailRackView.as_view(), name="rack"),
+    path('add_rack/', rack.AddRackView.as_view(), name="add_rack"),
+    path('edit_rack/<int:pk>', rack.EditRackView.as_view(), name="edit_rack"),
+    path('delete_rack/<int:pk>', rack.DeleteRackView.as_view(), name="delete_rack"),
+
+    # Book
+    path('books/', book.AllBookView.as_view(), name="books"),
+    path('book/<int:pk>', book.DetailBookView.as_view(), name="book"),
+    path('add_book/', book.AddBookView.as_view(), name="add_book"),
+    path('edit_book/<int:pk>', book.EditBookView.as_view(), name="edit_book"),
+    path('delete_book/<int:pk>', book.DeleteBookView.as_view(), name="delete_book"),
+
+    # E-Book
+    path('ebooks/', ebook.AllEbookView.as_view(), name="ebooks"),
+    path('ebook/<int:pk>', ebook.DetailEbookView.as_view(), name="ebook"),
+    path('add_ebook/', ebook.AddEbookView.as_view(), name="add_ebook"),
+    path('edit_ebook/<int:pk>', ebook.EditEbookView.as_view(), name="edit_ebook"),
+    path('delete_ebook/<int:pk>', ebook.DeleteEbookView.as_view(), name="delete_ebook"),
+
+    # Book
+    path('bookissues/', bookissue.AllBookIssueView.as_view(), name="bookissues"),
+    path('bookissue/<int:pk>', bookissue.DetailBookIssueView.as_view(), name="bookissue"),
+    path('add_bookissue/', bookissue.AddBookIssueView.as_view(), name="add_bookissue"),
+    path('edit_bookissue/<int:pk>', bookissue.EditBookIssueView.as_view(), name="edit_bookissue"),
+    path('delete_bookissue/<int:pk>', bookissue.DeleteBookIssueView.as_view(), name="delete_bookissue"),
 
 ]
 

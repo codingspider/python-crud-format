@@ -8,7 +8,6 @@ class AddBookForm(forms.ModelForm):
         super(AddBookForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control '
-            self.fields['author'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['publisher'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['book_language'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['rack'].widget.attrs.update({'class': 'form-control select2'})
@@ -29,7 +28,6 @@ class EditBookForm(forms.ModelForm):
         super(EditBookForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control '
-            self.fields['author'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['publisher'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['book_language'].widget.attrs.update({'class': 'form-control select2'})
             self.fields['rack'].widget.attrs.update({'class': 'form-control select2'})
@@ -39,6 +37,7 @@ class EditBookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+        exclude = ('author',)
         widgets = {
             'description': forms.Textarea(attrs={'rows': 5}),
             'post_date': DatePickerInput(format='%Y-%m-%d'),

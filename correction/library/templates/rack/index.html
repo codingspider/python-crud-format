@@ -1,0 +1,48 @@
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if perms.library.view_rack   %}
+{% if perms.library.add_rack %}
+<div class="fw fl mt40">
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_rack' %}">Add Rack</a>
+</div>
+{% endif %}
+<div class="fw fl mt40">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Serial No</th>
+            <th scope="col">Name</th>
+            <th scope="col">Number</th>
+             {% if perms.library.change_rack %}
+            <td>Edit</td>
+            {% endif %}
+            {% if perms.library.delete_rack %}
+            <td>Delete</td>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for rack in racks %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td class="tcap">{{rack.name}}</td>
+            <td>{{rack.number}}</td>
+
+
+            {% if perms.library.change_rack %}
+            <td><a href="{% url 'library:edit_rack' rack.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.library.delete_rack %}
+            <td><a href="{% url 'library:delete_rack' rack.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endif %}
+
+{% endblock %}

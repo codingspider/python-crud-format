@@ -1,0 +1,66 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.library.add_ebook %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="ebook_form">
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.title.label }}</label>
+                        {{ form.title }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.book_number.label }}</label>
+                        {{ form.book_number }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.isbn_number.label }}</label>
+                        {{ form.isbn_number }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.price.label }}</label>
+                        {{ form.price }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.publisher.label }}</label>
+                        {{ form.publisher }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.subject.label }}</label>
+                        {{ form.subject }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.book_language.label }}</label>
+                        {{ form.book_language }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.post_date.label }}</label>
+                        {{ form.post_date }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.image.label }}</label>
+                        {{ form.image }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.file.label }}</label>
+                        {{ form.file }}
+                    </div>
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.status.label }}</label>
+                        {{ form.status }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.description.label }}</label>
+                        {{ form.description }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+

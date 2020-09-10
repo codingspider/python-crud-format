@@ -1,0 +1,24 @@
+
+{% extends 'account/base.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if perms.library.delete_rack %}
+    <div class="fw fl mt40">
+        <p>Are you sure?</p>
+        <p>You want to delete {{rack.number}} ? </p>
+        <a href="{% url 'library:authors' %}">Cancel</a>
+        <form action="" method="post" id="">
+        {% csrf_token %}
+            <input type="submit" value="Confirm" class="btn btn-danger" >
+        </form>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
