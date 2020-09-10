@@ -1,0 +1,54 @@
+{% extends 'account/base.html' %}
+{% block content %}
+    {% if perms.frontoffice.view_phonecalllog   %}
+
+        {% if perms.frontoffice.add_phonecalllog  %}
+            <div class="fw fl mt40">
+                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_phone_call_log' %}">Add Phone Call</a>
+            </div>
+        {% endif %}
+
+        <div class="fw fl mt40">
+            <table class="table table-hover">
+                <thead>
+				<tr>
+					<th>Serial</th>
+					<th>Phone</th>
+					<th>Call </th>
+					<th>Date</th>
+					<th>Follow Up</th>
+					<th>Call Type</th>
+					<th>Note</th>
+                        {% if perms.frontoffice.change_phonecalllog   %}
+                            <th scope="col">Edit</th>
+                        {% endif %}
+                        {% if perms.frontoffice.delete_phonecalllog   %}
+                            <th scope="col">Delete</th>
+                        {% endif %}
+				</tr>
+                </thead>
+            <tbody>
+
+            {% for value in phone_calls  %}
+                <tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{value.phone}}</td>
+					<td >{{value.call}}</td>
+					<td>{{value.date}}</td>
+					<td>{{value.follow_up}}</td>
+					<td>{{value.call_type}}</td>
+					<td>{{value.note}}</td>
+
+                    {% if perms.frontoffice.change_phonecalllog  %}
+                        <td><a href="{% url 'frontoffice:edit_phone_call_log' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                    {% endif %}
+                    {% if perms.frontoffice.delete_phonecalllog  %}
+                        <td><a href="{% url 'frontoffice:delete_phone_call_log' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
+{% endblock content %}

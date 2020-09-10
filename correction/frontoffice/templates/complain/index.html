@@ -1,0 +1,62 @@
+{% extends 'account/base.html' %}
+{% block content %}
+    {% if perms.frontoffice.view_complain   %}
+
+        {% if perms.frontoffice.add_complain  %}
+            <div class="fw fl mt40">
+                <a  class="btn btn-secondary btn-sm" href="{% url 'frontoffice:add_complain' %}">Add Complain</a>
+            </div>
+        {% endif %}
+
+        <div class="fw fl mt40">
+            <table class="table table-hover">
+                <thead>
+				<tr>
+					<th>Serial</th>
+					<th>Complain Type</th>
+					<th>Complain By</th>
+					<th>Phone</th>
+					<th>Date</th>
+					<th>Description</th>
+					<th>Attachment</th>
+					<th>Action</th>
+                        {% if perms.frontoffice.change_complain   %}
+                            <th scope="col">Edit</th>
+                        {% endif %}
+                        {% if perms.frontoffice.delete_complain   %}
+                            <th scope="col">Delete</th>
+                        {% endif %}
+				</tr>
+                </thead>
+            <tbody>
+
+            {% for value in complains  %}
+                <tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{value.complain_type}}</td>
+					<td >{{value.complain_by}}</td>
+					<td>{{value.phone}}</td>
+					<td>{{value.date}}</td>
+					<td>{{value.description}}</td>
+					<td>
+						{% if value.attachment %}
+							<a class="badge badge-info" href="{{value.attachment.url}}" target="_blank">Attachment</a>
+						{% else %}
+							None
+						{% endif %}
+					</td>
+
+
+                    {% if perms.frontoffice.change_complain  %}
+                        <td><a href="{% url 'frontoffice:edit_complain' value.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+                    {% endif %}
+                    {% if perms.frontoffice.delete_complain  %}
+                        <td><a href="{% url 'frontoffice:delete_complain' value.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.frontoffice.edit_postaldispatch   %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="postal_dispatch_form" novalidate>
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.receiver.label }}</label>
+                        {{ form.receiver }}
+                    </div>
+
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.sender.label }}</label>
+                        {{ form.sender }}
+                    </div>
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.referance.label }}</label>
+                        {{ form.referance }}
+                    </div>
+
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.dispatch_date.label }}</label>
+                        {{ form.dispatch_date }}
+                    </div>
+
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.address.label }}</label>
+                        {{ form.address }}
+                    </div>
+
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.note.label }}</label>
+                        {{ form.note }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.attachment.label }}</label>
+                        {{ form.attachment }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.assigned.label }}</label>
+                        {{ form.assigned }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+{% endblock %}
+

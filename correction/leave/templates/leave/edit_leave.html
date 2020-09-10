@@ -1,0 +1,59 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.leave.edit_leave  %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="leave_form" novalidate>
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.applied_by.label }}</label>
+                        {{ form.applied_by }}
+                    </div>
+
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.leave_type.label }}</label>
+                        {{ form.leave_type }}
+                    </div>
+
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.apply_date.label }}</label>
+                        {{ form.apply_date }}
+                    </div>
+
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.from_date.label }}</label>
+                        {{ form.from_date }}
+                    </div>
+
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.to_date.label }}</label>
+                        {{ form.to_date }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.reason.label }}</label>
+                        {{ form.reason }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.attachment.label }}</label>
+                        {{ form.attachment }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.apply_status.label }}</label>
+                        {{ form.apply_status }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.approve_status.label }}</label>
+                        {{ form.approve_status }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+{% endblock %}
+

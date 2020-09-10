@@ -1,0 +1,83 @@
+{% load static %}
+
+
+<div class="fw fl p15 bg-w admin_header">
+
+
+    <div class="w25p fl admin_logo">
+        <a class="" href=""><span class="fs26 lh26 bold">Ehsan</span><span class="fs16 lh26"> Software</span>  </a>
+    </div>
+
+    <div class="w75p fl">
+        
+        <div class="user_profile fr relative ">
+
+
+           {% if user.is_authenticated %}
+            <div class="user_link  fr">
+                <div class="user_link_left fr">
+                    <p>{{ user.get_username }} <i class="ti ti-angle-down"></i> <i class="ti ti-angle-up dn"></i></p>
+                </div>
+                <div class="user_link_right fr">
+                    <img class="w30  mr10 circle-radius" src="{% static 'images/account/dummy/2.jpg' %}" alt="">
+                </div>
+            </div>
+
+            <div class="absolute dn w200 user_top_container">
+                <div class="fw fl user_header">
+                    <div class="w40p fl">
+                         <img class="fw fl" src="{% static 'images/account/dummy/2.jpg' %}" alt="">
+                    </div>
+                    <div class="w60p fl">
+                        <p>Full Name</p>
+                        <p>Phone</p>
+                    </div>
+                </div>
+                <div class="fw fl user_footer">
+                    <a class="fl" href=""><i class="fa fa-briefcase"></i> Profile</a>
+                    <a class="fr" href=""><i class="fa fa-power-off"></i> Logout</a>
+                </div>
+            </div>
+           {% else %}
+             <a href="{% url 'login'%}">Login</a>
+           {% endif %}
+
+        </div>        
+        
+        
+        <div class="notification fr relative  pr20 pl20">
+                <a class="w20 fr fs20 cp" ><i class="ti ti-bell"></i></a>
+                <ul class="lsn_li dn">
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                </ul>
+
+        </div>
+
+        <div class="w200 fr relative">
+            <form class="">
+                <input class="di pl10 pr10 " type="text" placeholder="Search"
+                aria-label="Search"> <i class="ti ti-search absolute top10 right10" aria-hidden="true"></i>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

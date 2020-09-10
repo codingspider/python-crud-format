@@ -1,0 +1,68 @@
+{% extends 'account/admin_view_temp.html' %}
+
+
+{% block content %}
+
+
+
+<div class="wrapper">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+
+    <div id="formHeader">
+        <p>Login</p>
+    </div>
+
+    <div class="login_info">
+		  {% if form.errors %}
+			  <p class="login_info_err">Your username and password didn't match. Please try again.</p>
+		  {% endif %}
+
+		  {% if next %}
+			{% if user.is_authenticated %}
+				<p class="login_info_war">Your account doesn't have access to this page. To proceed,
+				please login with an account that has access.</p>
+			{% else %}
+				<p class="login_info_err">Please login to see this page.</p>
+			{% endif %}
+		  {% endif %}
+    </div>
+
+    <!-- Login Form -->
+
+
+    <form method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		<input type="text" name="username"  id="id_username"   placeholder="username"  required >
+
+		<input type="password" name="password" id="id_password"  placeholder="password" required >
+		<input type="submit" value="login" />
+		<input type="hidden" name="next" value="{{ next }}" />
+	</form>
+
+    <div id="formFooter">
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

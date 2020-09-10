@@ -1,0 +1,61 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block content %}
+    {% if perms.frontoffice.add_visitorbook  %}
+        <div class="fw fl mt40">
+            <form action="" method="post" id="visitor_book_form" novalidate>
+                <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="" id="form_ed_id" class="dn">
+                {% csrf_token %}
+                {{ err_msg }}
+                <div class="row">
+                    <div class="col-md-6 mb15">
+                        <label >{{ form.purpose.label }}</label>
+                        {{ form.purpose }}
+                    </div>
+
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.name.label }}</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-md-3 mb15">
+                        <label >{{ form.phone.label }}</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.meet_user.label }}</label>
+                        {{ form.meet_user }}
+                    </div>
+
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.id_card.label }}</label>
+                        {{ form.id_card }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.date.label }}</label>
+                        {{ form.date }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.in_time.label }}</label>
+                        {{ form.in_time }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.out_time.label }}</label>
+                        {{ form.out_time }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.note.label }}</label>
+                        {{ form.note }}
+                    </div>
+                    <div class="col-md-12 mb15">
+                        <label >{{ form.attachment.label }}</label>
+                        {{ form.attachment }}
+                    </div>
+                </div>
+				<input type="submit" value="Save" >
+            </form>
+        </div>
+    {% endif %}
+<!--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+{% endblock %}
+

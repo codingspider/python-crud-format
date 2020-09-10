@@ -1,0 +1,177 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    -->
+
+
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap4.css' %}" >
+
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/classes.css' %}" >
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}" >
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" >
+
+    <title>School M Soft</title>
+
+  </head>
+  <body class="base ">
+
+
+   {% block content %}
+
+   {% endblock %}
+
+
+ <style>
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+  margin-top:50px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px ;
+  border-radius: 10px ;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  text-align: center;
+  border: 1px solid #dce8f1;
+}
+
+#formHeader {
+  border-bottom: 1px solid #dce8f1;
+  padding: 10px;
+  margin:0px 0px 20px;
+  text-align: center;
+  -webkit-border-radius: 10px 10px 0 0 ;
+  border-radius: 10px 10px 0 0 ;
+}
+
+#formHeader p{
+  padding: 0;
+  margin:0;
+  font-size:30px;
+  font-weight:bold;
+}
+
+p.login_info_err{
+  color: #dc3545 ;
+}
+
+p.login_info_war{
+  color: #ffc107 ;
+}
+
+#formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 15px;
+  text-align: center;
+  -webkit-border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px 10px;
+}
+
+
+
+/* FORM TYPOGRAPHY*/
+
+input[type=submit]{
+  background-color: #56baed;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 13px;
+  -webkit-border-radius: 5px ;
+  border-radius: 5px ;
+  margin: 5px 20px 40px 20px;
+}
+
+input[type=submit]:hover{
+  background-color: #39ace7;
+}
+
+input[type=submit]:active{
+  -moz-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  transform: scale(0.95);
+}
+
+input[type=text],
+input[type=password],
+input[type=email]
+ {
+  color: #0d0d0d;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 5px;
+  width: 85%;
+  border: 1px solid #dce8f1;
+  -webkit-border-radius: 5px ;
+  border-radius: 5px ;
+}
+
+input[type=text]:hover,
+input[type=password]:hover,
+input[type=email]:hover,
+input[type=text]:active,
+input[type=password]:active,
+input[type=email]:active,
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=text].active,
+input[type=password].active
+input[type=email].active
+{
+  border: 1px solid #dce8f1;
+}
+
+
+</style>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+  </body>
+</html>
+
+
+
+
