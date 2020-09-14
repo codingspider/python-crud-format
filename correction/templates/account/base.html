@@ -13,16 +13,17 @@
     -->
 
     <link rel="stylesheet" href="{% static 'css/bootstrap4.css' %}">
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
     <!-- Fonts -->
     <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- switch -->
     <link rel="stylesheet" href="{% static 'css/bootstrap-switch-button.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/custom.css' %}"> -->
     <!-- switch -->
 
-
+<link rel="stylesheet" type="text/css" media="print" href="{% static 'css/print.css' %}" />
     <!--- datepicker -->
     <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.css' %}">
     <link rel="stylesheet" href="{% static 'css/datepicker-widget.css' %}">
@@ -32,6 +33,7 @@
     <!--- custom -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/classes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
     <!--- custom -->
 
 
@@ -102,6 +104,7 @@
 
 <!--- custom started --->
 <script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/printThis.js' %}"></script>
 <script>
 /// complain
 $('#complain_form').submit(function(e){
@@ -703,7 +706,7 @@ $('#rack_form').submit(function(e){
 /// book rack
 
 /// book Issue
-$('#bookissue_form').submit(function(e){
+$('#student_bookissue_form').submit(function(e){
         e.preventDefault();
         $form = $(this);
         var formData = new FormData(this);
@@ -852,7 +855,9 @@ $('#ebook_form').submit(function(e){
         });
     });
 /// book rack
+
 </script>
+
 </body>
 </html>
 

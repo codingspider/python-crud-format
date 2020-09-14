@@ -1,0 +1,26 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+          <h1>Ebook Detail </h1>
+        <th>Title</th>
+        <th>Book ISBN</th>
+        <th>Book Number</th>
+        <th>Price</th>
+        <th>Publisher</th>
+        <th>Author</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ebook.title}}</td>
+            <td>{{ebook.isbn_number}}</td>
+            <td>{{ebook.book_number}}</td>
+            <td>{{ebook.price}}</td>
+            <td>{{ebook.publisher}}</td>
+            <td>{{ebook.author}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

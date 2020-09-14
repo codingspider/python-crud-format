@@ -1,0 +1,81 @@
+{% extends 'institute/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="alert alert-danger print-error-msg" style="display:none">
+    <ul></ul>
+</div>
+<form class="form-group" id="friend-form" method="post" enctype="multipart/form-data" novalidate>
+    <div class="row">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            <label class="col-md-6">{{ field.label }}</label>
+
+            {{ field }}
+        </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-success">Save Institute</button>
+</form>
+<div class="row">
+    <div class="col-md-4">
+        <img id="img_id" style="width:100px; height:100px; " src="" alt="your image"/>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+        function upload_img(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#img_id').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+</script>
+
+
+<script type="text/javascript">
+    $('#friend-form').submit(function(e){
+        e.preventDefault();
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            url: "/add_student/",
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                   alert('Student Added successfully')
+                    }else{
+                        console.log(data.error)
+                        printErrorMsg(data.error);
+                    }
+             },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+           function printErrorMsg (msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                if (value) {
+                $(".print-error-msg").find("ul").append('<li>'+key+' - '+value+'</li>');
+                return false;
+              }
+            });
+        }
+
+    });
+    // end
+
+</script>
+{% endblock %}

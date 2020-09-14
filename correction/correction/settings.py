@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'django.contrib.sites',
     'leave',
-    'library'
+    'library',
+    'idcard',
+    'student',
+    'subject',
+    'teacher'
 ]
 SITE_ID = 1
 BOOTSTRAP4 = {

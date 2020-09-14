@@ -1,0 +1,29 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="fw fl mt40">
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ err_msg }}
+        <div class="row">
+            <div class="col-md-3 mb15">
+                <label>{{ form.user_id.label }}</label>
+                {{ form.user_id }}
+            </div>
+            <div class="col-md-3 mb15">
+                <label>{{ form.type.label }}</label>
+                {{ form.type }}
+            </div>
+            <div class="col-md-3 mb15">
+                <label>{{ form.template.label }}</label>
+                {{ form.template }}
+            </div>
+            <div class="col-md-3 mb15">
+                <label>{{ form.id_side.label }}</label>
+                {{ form.id_side }}
+            </div>
+        </div>
+        <input type="submit" value="Generate Id Card">
+    </form>
+</div>
+{% endblock content%}

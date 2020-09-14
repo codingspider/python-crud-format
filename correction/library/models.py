@@ -11,6 +11,7 @@ import os
 class Author(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True)
+    image = models.ImageField(null=True, blank=True, upload_to='institute/institute/library/author')
     date_created = models.DateTimeField(auto_now_add=True)
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
@@ -23,6 +24,7 @@ class Author(models.Model):
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(max_length=200, null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='institute/institute/library/author')
     date_created = models.DateTimeField(auto_now_add=True)
     active_status = models.IntegerField(null=True, blank=True, default=2)
 
@@ -128,7 +130,7 @@ class EBook(models.Model):
 # ---------------------book issue------------------------------
 
 class BookIssue(models.Model):
-    member = models.ForeignKey(User, related_name='member', null=True, on_delete=models.SET_NULL)
+    user_id = models.CharField(max_length=255, null=True)
     issued_by = models.ForeignKey(User, related_name='issued_by', null=True, on_delete=models.SET_NULL, blank=True)
     book = models.ForeignKey(Book, null=True, on_delete=models.SET_NULL)
     note = models.TextField(null=True, blank=True)
@@ -139,3 +141,12 @@ class BookIssue(models.Model):
 
     def __int__(self):
         return self.member
+
+
+class LibraryStudentMember(models.Model):
+    user_id = models.CharField(max_length=255, null=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user_id
+

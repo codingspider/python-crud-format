@@ -1,0 +1,45 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="fw fl mt40">
+    <form action="" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ err_msg }}
+        <div class="row">
+            <div class="col-md-6 mb15">
+                <label>{{ form.id_card_title.label }}</label>
+                {{ form.id_card_title }}
+            </div>
+
+            <div class="col-md-6 mb15">
+                <label>{{ form.school_name.label }}</label>
+                {{ form.school_name }}
+            </div>
+
+            <div class="col-md-6 mb15">
+                <label>{{ form.signature.label }}</label>
+                {{ form.signature }}
+            </div>
+            <div class="col-md-6 mb15">
+                <label>{{ form.school_logo.label }}</label>
+                {{ form.school_logo }}
+            </div>
+            <div class="col-md-6 mb15">
+                <label>{{ form.background_image.label }}</label>
+                {{ form.background_image }}
+            </div>
+
+            <div class="col-md-6 mb15">
+                <label>{{ form.valid_till.label }}</label>
+                {{ form.valid_till }}
+            </div>
+            <div class="col-md-6 mb15">
+                <label>{{ form.address.label }}</label>
+                {{ form.address }}
+            </div>
+        </div>
+        <input type="submit" value="Save">
+
+    </form>
+</div>
+{% endblock content%}

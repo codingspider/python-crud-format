@@ -5,7 +5,7 @@
 {% if perms.library.view_bookissue   %}
 {% if perms.library.add_bookissue %}
 <div class="fw fl mt40">
-    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_bookissue' %}">Add Book Issue</a>
+    <a class="btn btn-secondary btn-sm" href="{% url 'library:add_bookissue' %}">Add  Student Book Issue</a>
 </div>
 {% endif %}
 <div class="fw fl mt40">
@@ -15,7 +15,7 @@
             <th scope="col">Serial No</th>
             <th scope="col">Issue By</th>
             <th scope="col">Book</th>
-            <th scope="col">Note</th>
+            <th scope="col">Issued for</th>
              {% if perms.library.change_bookissue %}
             <td>Edit</td>
             {% endif %}
@@ -28,9 +28,9 @@
         {% for bookissue in bookissues %}
         <tr>
             <td>{{forloop.counter}}</td>
-            <td class="tcap">{{bookissue.issue_by}}</td>
+            <td class="tcap">{{bookissue.issued_by}}</td>
             <td>{{bookissue.book}}</td>
-            <td>{{bookissue.note}}</td>
+            <td>{{bookissue.user_id}}</td>
 
             {% if perms.library.change_bookissue %}
             <td><a href="{% url 'library:edit_bookissue' bookissue.id %}" class="btn btn-primary btn-sm">Edit</a></td>

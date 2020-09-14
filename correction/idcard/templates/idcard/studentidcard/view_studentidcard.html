@@ -1,0 +1,97 @@
+{% extends 'account/base.html' %}
+{% block content %}
+{% load static %}
+<div class="x_content">
+ <input type='button' id='btn' value='Print'>
+ <button class="print_now" id="button_pdf">Download PDF File</button>
+    <div class="row">
+        {% if side == "F" %}
+        <div class="card-block demo" id="DivIdToPrintpdf">
+            <div class="card-top">
+                <div class="card-logo">
+                    <img src="{{ id_card.school_logo.url }}" alt="" style="hight: 50px; width: 50px;">
+                </div>
+                <div class="card-school">
+                    <h6>{{id_card.school_name}}</h6>
+                    <p>{{id_card.address}}</p>
+                    <p>Phone: 123456789</p>
+                </div>
+            </div>
+            <div class="std-id">
+                <h3><span>Student ID: {{student.id_number}}</span></h3>
+            </div>
+            <div class="card-main">
+                <div class="card-photo">
+                   {% if student.student_image %}
+                   <img src="{{ student.student_image.url }}" alt="" style="hight: 50px; width: 70px;">
+
+                    {% else %}
+                    <img src="{% static 'img/cd886e4afd07dafeee0f1bc4872740f9.png' %}" alt="" style="hight: 50px; width: 50px;">
+                    {% endif %}
+                </div>
+                <div class="card-info">
+                    <p><span class="card-title">Student Name</span>:<span class="span-font pull-right"> {{ student.student_name}}</span></p>
+                    <p><span class="card-title">Class Roll</span>:<span class="span-font pull-right"> {{ student.class_roll}}</span></p>
+                    <p><span class="card-title">Blood Group</span>:<span class="span-font pull-right"> {{ student.blood_group}}</span></p>
+                    <p><span class="card-title">Birth Date</span>:<span class="span-font pull-right"> {{ student.dob}}</span></p>
+                    <p><span class="card-title">Phone Number</span>:<span class="span-font pull-right"> {{student.phone_number}}</span></p>
+                </div>
+            </div>
+            <div class="card-bottom">
+                <span style="padding-left:300px; display:block;">
+                    <img class="manImg" src="{{ id_card.signature.url}}" style="hight: 40px; width: 40px;">
+              </span>
+            </div>
+        </div>
+        {% elif side == "B" %}
+        <div class="card-block demo" id="DivIdBack">
+            <div class="card-top">
+                <div class="card-logo">
+                    <img src="{{ id_card.school_logo.url }}" alt="" style="hight: 50px; width: 50px;">
+                </div>
+                <div class="card-school">
+                    <h6>{{id_card.school_name}}</h6>
+                    <p>{{id_card.address}}</p>
+                    <p>Phone: 123456789</p>
+                </div>
+            </div>
+
+            <div class="card-main">
+                <div class="card-photo" style="padding-left: 150px;">
+                    <img src="{% static 'img/codes-2.png' %}" alt="" style="hight: 50px; width: 80px;">
+                </div>
+                <div class="card-info" style="padding-left: 20px;">
+                    <p><span class="card-title">If you found this id card, Please return it to {{ id_card.school_name}}</span></p>
+
+                </div>
+            </div>
+            <div class="card-bottom">
+                <span style="padding-left:300px; display:block;">
+
+              </span>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+$('#btn').on("click", function () {
+      $('.demo').printThis({
+        importCSS: true,
+        importStyle: true,
+      });
+    });
+$('#button_pdf').click(function() {
+  var options = {
+     background:"#ffffff"
+  };
+  var pdf = new jsPDF('p', 'pt', 'a4');
+  pdf.addHTML($("#DivIdToPrintpdf"), 15, 15, options, function() {
+    pdf.save('pageContent.pdf');
+  });
+});
+
+</script>
+{% endblock content %}

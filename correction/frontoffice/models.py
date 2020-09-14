@@ -89,9 +89,9 @@ class Postalreceive(models.Model):
 
 class Complain(models.Model):
 
-    complain_type=models.CharField(max_length=100, null=True, choices=TYPE )
-    complain_by=models.ForeignKey(User , null=True  , on_delete=models.SET_NULL)
-    phone=models.CharField(max_length=200, null=True )
+    complain_type=models.CharField(max_length=100, null=True, choices=TYPE)
+    complain_by=models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    phone=models.CharField(max_length=200, null=True)
     date=models.CharField(max_length=255, null=True)
     description=models.TextField(null=True,blank=True)
     action_taken=models.TextField(null=True,blank=True)

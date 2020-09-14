@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import author, publisher, subject, booklanguage, rack, book, bookissue, ebook
+from .views import author, publisher, subject, booklanguage, rack, book, studentbookissue, ebook, librarystudent
 
 app_name = 'library'
 
@@ -54,10 +54,19 @@ urlpatterns = [
     path('delete_ebook/<int:pk>', ebook.DeleteEbookView.as_view(), name="delete_ebook"),
 
     # Book
-    path('bookissues/', bookissue.AllBookIssueView.as_view(), name="bookissues"),
-    path('bookissue/<int:pk>', bookissue.DetailBookIssueView.as_view(), name="bookissue"),
-    path('add_bookissue/', bookissue.AddBookIssueView.as_view(), name="add_bookissue"),
-    path('edit_bookissue/<int:pk>', bookissue.EditBookIssueView.as_view(), name="edit_bookissue"),
-    path('delete_bookissue/<int:pk>', bookissue.DeleteBookIssueView.as_view(), name="delete_bookissue"),
+    path('bookissues/', studentbookissue.AllBookIssueView.as_view(), name="bookissues"),
+    path('bookissue/<int:pk>', studentbookissue.DetailBookIssueView.as_view(), name="bookissue"),
+    path('add_bookissue/', studentbookissue.AddBookIssueView.as_view(), name="add_bookissue"),
+    path('add_student_bookissue/', studentbookissue.AddBookIssueView.as_view(), name="add_bookissue"),
+    path('edit_bookissue/<int:pk>', studentbookissue.EditBookIssueView.as_view(), name="edit_bookissue"),
+    path('delete_bookissue/<int:pk>', studentbookissue.DeleteBookIssueView.as_view(), name="delete_bookissue"),
+
+
+    # Library student member
+    # path('librarystudents/', librarystudent.AllLibraryStudentView.as_view(), name="librarystudents"),
+    # path('librarystudent/<int:pk>', librarystudent.DetailLibraryStudentView.as_view(), name="librarystudent"),
+    # path('add_librarystudent/', librarystudent.AddLibraryStudentView.as_view(), name="add_librarystudent"),
+    # path('edit_librarystudent/', librarystudent.AddLibraryStudentView.as_view(), name="edit_librarystudent"),
+    # path('delete_librarystudent/<int:pk>', librarystudent.DeleteLibraryStudentView.as_view(), name="delete_librarystudent"),
 
 ]

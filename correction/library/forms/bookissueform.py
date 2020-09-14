@@ -3,12 +3,11 @@ from django import forms
 from ..models import *
 
 
-class AddBookIssueForm(forms.ModelForm):
+class AddStudentBookIssueForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(AddBookIssueForm, self).__init__(*args, **kwargs)
+        super(AddStudentBookIssueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
-            self.fields['member'].widget.attrs.update({'class': 'form-control select2'})
             # self.fields['issue_date'].widget.attrs.update({'class': 'form-control'})
             visible.field.widget.attrs['placeholder'] = 'Enter text here ...'
 
@@ -23,9 +22,9 @@ class AddBookIssueForm(forms.ModelForm):
         }
 
 
-class EditBookIssueForm(forms.ModelForm):
+class EditStudentBookIssueForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(EditBookIssueForm, self).__init__(*args, **kwargs)
+        super(EditStudentBookIssueForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
             self.fields['member'].widget.attrs.update({'class': 'form-control select2'})
