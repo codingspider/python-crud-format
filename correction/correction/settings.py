@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'idcard',
     'student',
     'subject',
-    'teacher'
+    'teacher',
+    'admitcard',
+    'certificate'
 ]
 SITE_ID = 1
 BOOTSTRAP4 = {

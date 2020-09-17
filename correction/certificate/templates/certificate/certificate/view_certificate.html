@@ -1,0 +1,87 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<style>
+    .certificate {
+    min-height: 550px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 80px 120px;
+    background: url({{ certificate.background_image.url }}) no-repeat;
+    background-size: 100% 100%;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    text-align: center;
+
+}
+    .sub-title-img {
+    font-family: 'Prosto One', cursive;
+    height: 100%;
+    padding-top: 20px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+.name-text {
+    font-family: 'Michroma', sans-serif;
+    font-size: 25px;
+    color: #333;
+    text-align: center !important;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.footer_text {
+    font-family: 'Prosto One', cursive;
+    font-size: 14px;
+    border-top: 1px dashed;
+    width: 20%;
+    display: inline-block;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 3rem;
+}
+
+</style>
+<div class="certificate demo col-md-12">
+    <div class="certificate-top">
+        <h2 class="top-heading-title">{{ card.school_name }}</h2>
+        <div class="row">
+            <span class="sub-title-img">
+               <img src="{{ card.school_logo.url}}" alt="" style="height: 80px; width:80px;">
+            </span>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="name-section">
+        <div style="text-align:center;">
+            <h3 class="name-text">{{certificate.certificate_name}}</h3>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="main-text-block">
+        <p class="main-text">
+            By the present, I certified that <strong>{{ student.student_name }}</strong>, of <strong>{{student.session}}</strong> years old, who lives
+            in <strong>3243 Hosea Ln Autaugaville, AL 63803</strong>, being her/his guardian <strong>TK Musakandae</strong> , is
+            a active student for this institution since <strong>Feb-15-2018</strong>
+        </p>
+    </div>
+    <div class="footer-section">
+        <div class="row">
+            <div class="col-sm-4 footer_text">Principal</div>
+            <div class="col-sm-4 "></div>
+            <div class="col-sm-4 footer_text">Date</div>
+        </div>
+    </div>
+</div>
+<button  class="btn btn-info" id="btn">Print</button>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$('#btn').on("click", function () {
+      $('.demo').printThis({
+        importCSS: true,
+        importStyle: true,
+      });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<div class="fw fl mt40">
+    <div class="alert alert-danger print-error-msg" style="display:none">
+            <ul></ul>
+    </div>
+
+    <form action="/certificate/get_students/" method="post" id="certificate-form">
+        {% csrf_token %}
+        {{ err_msg }}
+        <div class="row">
+            <div class="col-md-6 mb15">
+                <select class="custom-select" name="class_id" id="inputGroupSelect01" required>
+                    <option selected>Choose Class...</option>
+                    {% for class in classes %}
+                    <option value="{{ class.id }}">{{ class.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6 mb15">
+                <select class="custom-select" name="certificate_type_id" id="inputGroupSelect" required>
+                    <option selected>Choose Certificate Type...</option>
+                    {% for certifactetype in certifactetypes %}
+                    <option value="{{ certifactetype.id }}">{{ certifactetype.certificate_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+        <input type="submit" id="call" value="Find">
+    </form>
+    <hr>
+
+    {% if  students %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Serial</th>
+                <th>Photo </th>
+                <th>Name </th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.student_name }}</td>
+                <td>   <img src="{{ student.student_image.url }}" alt="" style="hight:30px; width: 30px;"></td>
+                <td>{{ student.student_name }}</td>
+                <td>{{ student.phone_number}}</td>
+                <td>{{ student.email}}</td>
+
+                <td>
+                    <a href="/certificate/generate_certificate/{{student.id}}/{{types.id}}" class="btn btn-info">Generate</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    {% endif %}
+</div>
+
+{% endblock content %}

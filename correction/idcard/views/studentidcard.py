@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.core import serializers
+from django.http import JsonResponse
+from django.shortcuts import render
 from django.views import View
 from ..models import StudentIdCard, IdCard
-from django.http import HttpResponse
 from ..forms.studentidform import AddStudentIdForm
 from student.models import Student
 from teacher.models import Teacher
@@ -29,33 +30,27 @@ class AddStudentIdCardView(View):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        return_form = self.form_class
         if form.is_valid():
             instance = form.save()
-
             pk = instance.template_id
-
             side = request.POST.get('id_side')
             user_type = request.POST.get('type')
-
-            id_card = IdCard.objects.get(pk=pk)
-
+            id_card = IdCard.objects.filter(pk=pk).values()
             id = request.POST.get('user_id')
+            queryset = Student.objects.filter(pk=id).values()
+            teacher = Teacher.objects.filter(pk=id)
 
-            student = Student.objects.get(pk=id)
-            teacher = Teacher.objects.get(pk=id)
-
-            context = {
-                'student': student,
+            data = {
+                'student': queryset,
                 'id_card': id_card,
-                'side': side,
-                'teacher': teacher
+                'teacher': teacher,
             }
-            if user_type == 'teacher':
-                return render(request, 'idcard/teacheridcard/teacheridcard.html', context)
-            elif user_type == 'staff':
-                return render(request, 'idcard/staffidcard/staffidcard.html', context)
-            else:
-                return render(request, 'idcard/studentidcard/view_studentidcard.html', context)
+            return JsonResponse({'data': list(queryset), 'id_card': list(id_card)})
+        else:
+            return JsonResponse({"error": form.errors}, json_dumps_params={'indent': 2})
+
+
 
 
 

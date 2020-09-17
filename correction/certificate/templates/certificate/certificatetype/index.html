@@ -1,0 +1,49 @@
+{% extends 'account/base.html' %}
+{% block content %}
+{% if perms.certificate.view_certificatetype %}
+<div class="col-md-12">
+    {% if perms.certificate.add_certificatetype %}
+    <div class="fw fl mt40">
+        <a class="btn btn-secondary btn-sm" href="{% url 'certificate:add_certificatetype' %}">Add Certificate Type</a>
+    </div>
+    {% endif %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Certificate Type</th>
+            <th>School Name</th>
+            <th>Background Image</th>
+            {% if perms.certificate.change_certificatetype %}
+            <th scope="col">Edit</th>
+            {% endif %}
+            {% if perms.certificate.delete_certificatetype %}
+            <th scope="col">Delete</th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for certificatetype in certificatetypes%}
+        <tr>
+            <td>{{ certificatetype.certificate_name}}</td>
+            <td>{{ certificatetype.school_name }}</td>
+            <td>
+                {% if certificatetype.background_image %}
+                <img src="{{ certificatetype.background_image.url }}" alt="" style="hight:80px; width: 100px;">
+                {% else %}
+                None
+                {% endif %}
+            </td>
+            {% if perms.certificate.change_certificatetype %}
+            <td><a href="{% url 'certificate:edit_certificatetype' certificatetype.id %}" class="btn btn-primary btn-sm">Edit</a></td>
+            {% endif %}
+            {% if perms.certificate.delete_certificatetype %}
+                <td><a href="{% url 'certificate:delete_certificatetype' certificatetype.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+            {% endif %}
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock content %}

@@ -27,6 +27,9 @@ urlpatterns = [
     path('idcard/', include('idcard.urls')),
     path('student/', include('student.urls')),
     path('teacher/', include('teacher.urls')),
+    path('admitcard/', include('admitcard.urls')),
+    path('certificate/', include('certificate.urls')),
+
 ]
 
 if settings.DEBUG:

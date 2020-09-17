@@ -1,0 +1,88 @@
+{% extends 'account/base.html' %}
+{% block content %}
+    {% if perms.certificate.change_certificatetype  %}
+<div class="fw fl mt40">
+    <form action="" method="post" id="certificatetype-form" enctype="multipart/form-data" novalidate>
+            <div class="alert alert-danger form_msg dn" ></div>
+                <input type="text" value="{{pk}}" id="form_ed_id" class="dn">
+        {% csrf_token %}
+        {{ err_msg }}
+        <div class="row">
+            <div class="col-md-6 mb15">
+                <label>{{ form.certificate_name.label }}</label>
+                {{ form.certificate_name }}
+            </div>
+            <div class="col-md-6 mb15">
+                <label>{{ form.school_name.label }}</label>
+                {{ form.school_name }}
+            </div>
+
+            <div class="col-md-6 mb15">
+                <label>{{ form.background_image.label }}</label>
+                {{ form.background_image }}
+            </div>
+            <div class="col-md-3 mb15">
+                <label>{{ form.certificate_text.label }}</label>
+                {{ form.certificate_text }}
+            </div>
+            <div class="col-md-3 mb15">
+                <label>{{ form.note.label }}</label>
+                {{ form.note }}
+            </div>
+        </div>
+        <input type="submit" id="call" value="Update Certificate Type">
+    </form>
+    <hr>
+</div>
+{% endif %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    /// certificate type
+$('#certificatetype-form').submit(function(e){
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+        var form_ed_id = $('#form_ed_id').attr('value');
+        if(form_ed_id.length <1){
+            var url = "{% url 'certificate:add_certificatetype' %}";
+            var action = 'add';
+        }else{
+            var url = '/certificate/edit_certificatetype/'+form_ed_id;
+            var action = 'edit';
+        }
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                    if(action == 'add'){
+                        var user = data.user
+                        var re_url = "{% url 'certificate:certificatetypes' %}";
+                        printSuccess(data.success,re_url);
+                    }else{
+                        var re_url = "{% url 'certificate:certificatetypes' %}";
+                        printSuccess(data,re_url);
+                    }
+
+                }else{
+                    if(data.custom_error){
+                        printErrorOnly(data.error);
+                    }else{
+                        printErrorMsg(data.error);
+                    }
+                }
+            },
+            complete:function(){
+               $('body, html').animate({scrollTop:$('form').offset().top}, 'fast');
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+    });
+/// certificate type
+</script>
+{% endblock %}

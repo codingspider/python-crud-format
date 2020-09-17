@@ -1,8 +1,11 @@
 {% extends 'account/base.html' %}
 {% block content %}
 <div class="fw fl mt40">
-    <form action="" method="post" enctype="multipart/form-data">
+    <div class="alert alert-danger print-error-msg" style="display:none">
+            <ul></ul>
+        </div>
 
+    <form action="" method="post" id="idcard-form" enctype="multipart/form-data" novalidate>
         {% csrf_token %}
         {{ err_msg }}
         <div class="row">
@@ -23,7 +26,90 @@
                 {{ form.id_side }}
             </div>
         </div>
-        <input type="submit" value="Generate Id Card">
+        <input type="submit" id="call" value="Generate Id Card">
     </form>
+    <hr>
+    <input type='button' id='btn' value='Print'>
+    <button class="print_now" id="button_pdf">Download PDF File</button>
 </div>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $('#idcard-form').submit(function(e){
+        e.preventDefault();
+        var id_side = document.getElementById("id_id_side").value;
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            url: "/idcard/add_studentidcard/",
+            type: 'POST',
+            data: formData,
+            success: function (data) {
+                if($.isEmptyObject(data.error)){
+                   var image = data['data'][0]['student_image'];
+
+                   var image_alert = data['id_card'][0]['signature'];
+                   var school_logo = data['id_card'][0]['school_logo'];
+
+                   
+                  if (id_side == "F") {
+
+                    //$("p").append(data['data'][0]['student_name']);
+                  $('.mt40').last().append('<div class="card-block demo" id="DivIdToPrintpdf"><div class="card-top"><div class="card-logo"><img src="/media/'+school_logo+'" alt="" style="hight: 50px; width: 50px;"></div><div class="card-school"><h6>'+data['id_card'][0]['school_name']+'</h6><p>'+data['id_card'][0]['address']+'</p><p>Phone: 123456789</p></div></div><div class="std-id"><h3><span>Student ID: '+data['data'][0]['id_number']+' </span></h3></div><div class="card-main"><div class="card-photo"><img src="/media/'+image+'" alt="" style="hight: 50px; width: 70px;"></div><div class="card-info"><p><span class="card-title">Student Name</span>:<span class="span-font pull-right">'+data['data'][0]['student_name']+'</span></p><p><span class="card-title">Class Roll</span>:<span class="span-font pull-right"> '+data['data'][0]['class_roll']+'</span></p><p><span class="card-title">Blood Group</span>: <span class="span-font pull-right"> '+data['data'][0]['blood_group']+'</span></p><p><span class="card-title">Birth Date</span>:<span class="span-font pull-right">'+data['data'][0]['dob']+'</span></p><p><span class="card-title">Phone Number</span>:<span class="span-font pull-right">'+data['data'][0]['phone_number']+'</span></p></div></div><div class="card-bottom"><span style="padding-left:300px; display:block;"> <img class="manImg" src="/media/'+image_alert+'" style="hight: 40px; width: 40px;"> </span></div> </div>');
+                           
+                    } 
+
+                    else{
+                         $('.mt40').last().append('<div class="card-block demo" id="DivIdBack"><div class="card-top"><div class="card-logo"><img src="/media/'+school_logo+'" alt="" style="hight: 50px; width: 50px;"></div><div class="card-school"><h6>'+data['id_card'][0]['school_name']+'</h6><p>'+data['id_card'][0]['address']+'</p><p>Phone: 123456789</p></div></div><div class="card-main"><div class="card-photo" style="padding-left: 150px;"><img src="" alt="" style="hight: 50px; width: 80px;"></div><div class="card-info" style="padding-left: 20px;"><p><span class="card-title">If you found this id card, Please return it to '+data['id_card'][0]['school_name']+'</span></p></div></div><div class="card-bottom"><span style="padding-left:300px; display:block;"></span></div></div>');
+
+                    }
+
+                   
+
+                  console.log(data);
+                    }else{
+                        console.log(data.error)
+                        printErrorMsg(data.error);
+                    }
+             },
+            cache: false,
+            contentType: false,
+            processData: false
+
+        });
+           function printErrorMsg (msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                if (value) {
+                $(".print-error-msg").find("ul").append('<li>'+key+' - '+value+'</li>');
+                return false;
+              }
+            });
+        }
+
+    });
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+$('#btn').on("click", function () {
+      $('.demo').printThis({
+        importCSS: true,
+        importStyle: true,
+      });
+    });
+$('#button_pdf').click(function() {
+  var options = {
+     background:"#ffffff"
+  };
+  var pdf = new jsPDF('p', 'pt', 'a4');
+  pdf.addHTML($("#DivIdToPrintpdf"), 15, 15, options, function() {
+    pdf.save('pageContent.pdf');
+  });
+});
+
+</script>
 {% endblock content%}
